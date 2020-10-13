@@ -3,7 +3,7 @@
 struct Node
 {
     Book* book{};
-    Node* next{};
+    Node* next{}; //Esto sirve para hacer cadenas
 
     Node(Book* book, Node* next)
     {

@@ -5,18 +5,23 @@ Queue::Queue(){}
 
 Queue::~Queue()
 {
-    Node* temp = first;
-
-    Node* currentHead{};
-
-    while (temp)
+    if(!IsEmpty())
     {
-        currentHead = temp;
-        temp = currentHead->next;
-        delete currentHead;
+        Node* current = first; //Se guarda el valor del principio para recorrerlo.
+        while (current)
+        {
+            Pop();
+            current = first; 
+        }
     }
+    else
+    {
+        std::cout << "La cola esta vacia" << std::endl; //Se detiene cuando llegue a un first vacio.
+    }
+    
 }
 
+//agregar nodos
 void Queue::Add(Book* book)
 {
     Node* node{new Node(book)};
@@ -35,9 +40,10 @@ void Queue::Add(Book* book)
 
 bool Queue::IsEmpty() const
 {
-    return !first; // pregunta si no existo osea si estoy null
+    return !first; //Pregunta si no existo/si estoy null
 }
 
+//Antes de agregar algo hay que preguntar si esta vacio
 Node* Queue::Peek() const
 {
     if (IsEmpty())
@@ -46,13 +52,13 @@ Node* Queue::Peek() const
     }
     else
     {
-        return first;   
+        return first;  
     }
 }
 
-void Queue::Pop()
+void Queue::Pop() //En la cola se elimina el primero que este a la cabeza.
 {
-    Node* temp = first;
+    Node* temp = first; 
     first = temp->next;
     delete temp;
 }
@@ -63,14 +69,14 @@ void Queue::Print()
 
     if(IsEmpty())
     {
-        std::cout << "La cola esta vacía" << std::endl;
+        std::cout << "La cola esta vacia" << std::endl;
         return;
     }
 
     while (temp)
     {
-        std::cout << "Nombre del libro" << temp->book->GetName() << std::endl;
-        std::cout << "Nombre del autor" << temp->book->GetAuthor() << std::endl;
+        std::cout << "Nombre del libro: " << temp->book->GetName() << std::endl;
+        std::cout << "Nombre del autor: " << temp->book->GetAuthor() << std::endl;
         std::cout << std::endl;
 
         temp = temp->next;
